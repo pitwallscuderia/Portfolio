@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bevin Frederick Gonsalves // Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Barlow:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+:root {
+  --bg:       #0a0a0c;
+  --bg2:      #0f0f12;
+  --bg3:      #14141a;
+  --panel:    #16161e;
+  --orange:   #e8500a;
+  --orange2:  #ff6b1a;
+  --dim:      #3a3a48;
+  --mid:      #6a6a80;
+  --text:     #d8d8e8;
+  --bright:   #f0f0f8;
+  --grid:     rgba(232,80,10,0.07);
+  --mono:     'Share Tech Mono', monospace;
+  --display:  'Rajdhani', sans-serif;
+  --body:     'Barlow', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--body);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  cursor: crosshair;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.04) 2px, rgba(0,0,0,0.04) 4px);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.grid-bg {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.5rem;
+  height: 60px;
+  background: rgba(10,10,12,0.9);
+  border-bottom: 1px solid var(--dim);
+  backdrop-filter: blur(12px);
+}
+
+.nav-logo {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--orange);
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-logo::before {
+  content: '';
+  display: inline-block;
+  width: 8px; height: 8px;
+  background: var(--orange);
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  animation: blink 1.8s step-end infinite;
+}
+
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+.nav-links { display:flex; gap:2rem; list-style:none; }
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--orange);
+  transition: width 0.2s;
+}
+.nav-links a:hover { color: var(--orange); }
+.nav-links a:hover::after { width: 100%; }
+
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 8rem 2.5rem 5rem;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.hero-speedlines {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.speedline {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent 0%, var(--orange) 30%, var(--orange) 70%, transparent 100%);
+  opacity: 0;
+  animation: speedline-fall 3s ease-in infinite;
+}
+
+.speedline:nth-child(1)  { left: 12%; animation-delay: 0s;    animation-duration: 2.8s; opacity: 0.08; }
+.speedline:nth-child(2)  { left: 28%; animation-delay: 0.7s;  animation-duration: 3.2s; opacity: 0.05; }
+.speedline:nth-child(3)  { left: 45%; animation-delay: 1.4s;  animation-duration: 2.5s; opacity: 0.1;  }
+.speedline:nth-child(4)  { left: 62%; animation-delay: 0.3s;  animation-duration: 3.5s; opacity: 0.06; }
+.speedline:nth-child(5)  { left: 78%; animation-delay: 1.1s;  animation-duration: 2.9s; opacity: 0.08; }
+.speedline:nth-child(6)  { left: 90%; animation-delay: 0.5s;  animation-duration: 3.1s; opacity: 0.04; }
+
+@keyframes speedline-fall {
+  0%   { transform: scaleY(0) translateY(-100%); opacity: 0; }
+  20%  { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: scaleY(1) translateY(0); opacity: 0; }
+}
+
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.hero-eyebrow::before { content: '▶'; font-size: 9px; }
+
+h1 {
+  font-family: var(--display);
+  font-size: clamp(3.5rem, 9vw, 8rem);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  color: var(--bright);
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+}
+
+h1 span { color: var(--orange); display: block; }
+
+.hero-sub {
+  font-family: var(--display);
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: 400;
+  color: var(--mid);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 3rem;
+  margin-top: 0.5rem;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 3rem;
+  margin-bottom: 2.5rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--dim);
+  border-bottom: 1px solid var(--dim);
+}
+
+.hero-stat { display: flex; flex-direction: column; gap: 4px; }
+
+.hero-stat-val {
+  font-family: var(--mono);
+  font-size: 1.6rem;
+  color: var(--orange);
+  line-height: 1;
+}
+
+.hero-stat-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mid);
+}
+
+.hero-ctas { display: flex; gap: 1rem; align-items: center; }
+
+.btn-primary {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--orange);
+  padding: 0.8rem 2rem;
+  text-decoration: none;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  transition: background 0.2s;
+}
+.btn-primary:hover { background: var(--orange2); }
+
+.btn-outline {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+  border: 1px solid var(--orange);
+  padding: 0.8rem 2rem;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-outline:hover { background: rgba(232,80,10,0.1); }
+
+.rev-counter {
+  position: absolute;
+  right: 3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 200px; height: 200px;
+  pointer-events: none;
+}
+.rev-counter svg { width: 100%; height: 100%; }
+
+section {
+  position: relative;
+  z-index: 1;
+  padding: 6rem 2.5rem;
+}
+
+.section-inner { max-width: 960px; margin: 0 auto; }
+.section-header { margin-bottom: 3rem; }
+
+.section-id {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.section-id::before { content: '//'; }
+
+h2 {
+  font-family: var(--display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--bright);
+  line-height: 1;
+}
+
+#about { background: var(--bg2); }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 4rem;
+  align-items: start;
+}
+
+.about-text p {
+  color: var(--text);
+  font-weight: 300;
+  margin-bottom: 1.25rem;
+  font-size: 1rem;
+}
+
+.data-panel {
+  background: var(--panel);
+  border: 1px solid var(--dim);
+  border-left: 3px solid var(--orange);
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+}
+
+.data-panel-header {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--orange);
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid var(--dim);
+  background: rgba(232,80,10,0.05);
+}
+
+.data-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid rgba(58,58,72,0.5);
+  gap: 1rem;
+}
+.data-row:last-child { border-bottom: none; }
+
+.data-key {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mid);
+  flex-shrink: 0;
+}
+
+.data-val {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text);
+  text-align: right;
+}
+
+.data-val.live {
+  color: var(--orange);
+  position: relative;
+  padding-left: 14px;
+}
+.data-val.live::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+  animation: pulse 1.5s ease infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+#skills { background: var(--bg); }
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: var(--dim);
+  border: 1px solid var(--dim);
+}
+
+.skill-group { background: var(--bg); padding: 1.5rem; }
+
+.skill-group-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--dim);
+}
+
+/* EXPERIENCE */
+.experience-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--dim);
+  border: 1px solid var(--dim);
+}
+
+.experience-row {
+  background: var(--bg);
+  padding: 1.5rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-left: 3px solid var(--dim);
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.experience-row:hover { background: var(--panel); border-left-color: var(--orange); }
+
+.exp-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.exp-title {
+  font-family: var(--display);
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--bright);
+}
+
+.exp-year {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--orange);
+  white-space: nowrap;
+  padding-top: 3px;
+  flex-shrink: 0;
+}
+
+.exp-desc {
+  font-size: 0.88rem;
+  color: var(--mid);
+  font-weight: 300;
+  line-height: 1.7;
+}
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skill-check-list li {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text);
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.check {
+  color: var(--orange);
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.skill-bar-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.skill-bar-item { display: flex; flex-direction: column; gap: 4px; }
+
+.skill-bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--mid);
+  letter-spacing: 0.05em;
+}
+
+.skill-bar-track {
+  height: 3px;
+  background: var(--dim);
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-bar-fill {
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  background: linear-gradient(to right, var(--orange), var(--orange2));
+  width: 0;
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#projects { background: var(--bg2); }
+
+.projects-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--dim);
+  border: 1px solid var(--dim);
+}
+
+.project-card {
+  background: var(--bg2);
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 72px 1fr auto;
+  gap: 1.5rem;
+  align-items: start;
+  transition: background 0.2s;
+  position: relative;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--dim);
+  transition: background 0.2s;
+}
+
+.project-card:hover { background: var(--panel); }
+.project-card:hover::before { background: var(--orange); }
+
+.project-num {
+  font-family: var(--mono);
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--dim);
+  line-height: 1;
+  padding-top: 4px;
+  letter-spacing: -0.02em;
+  transition: color 0.2s;
+}
+.project-card:hover .project-num { color: var(--orange); }
+
+.project-title {
+  font-family: var(--display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--bright);
+  margin-bottom: 0.5rem;
+}
+
+.project-desc {
+  font-size: 0.88rem;
+  color: var(--mid);
+  font-weight: 300;
+  margin-bottom: 1rem;
+}
+
+.tag-row { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.tag {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--orange);
+  border: 1px solid rgba(232,80,10,0.35);
+  padding: 3px 8px;
+  background: rgba(232,80,10,0.05);
+}
+
+.project-link-col { display: flex; align-items: flex-start; padding-top: 6px; }
+
+.project-link {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  border: 1px solid var(--dim);
+  padding: 6px 14px;
+  white-space: nowrap;
+  transition: color 0.2s, border-color 0.2s;
+}
+.project-link:hover { color: var(--orange); border-color: var(--orange); }
+
+#achievements { background: var(--bg); }
+
+.achievements-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--dim);
+  border: 1px solid var(--dim);
+}
+
+.achievement-row {
+  background: var(--bg);
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  transition: background 0.2s;
+}
+.achievement-row:hover { background: var(--panel); }
+
+.ach-icon {
+  width: 40px; height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--orange);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background: rgba(232,80,10,0.08);
+  flex-shrink: 0;
+}
+
+.ach-title {
+  font-family: var(--display);
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--bright);
+  margin-bottom: 0.2rem;
+}
+
+.ach-desc { font-size: 0.85rem; color: var(--mid); font-weight: 300; }
+
+.ach-year {
+  font-family: var(--mono);
+  font-size: 1.1rem;
+  color: var(--dim);
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+.achievement-row:hover .ach-year { color: var(--orange); }
+
+#contact { background: var(--bg2); }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.contact-desc { font-size: 1rem; color: var(--mid); font-weight: 300; margin-bottom: 2rem; }
+
+.contact-links { list-style: none; display: flex; flex-direction: column; gap: 1px; background: var(--dim); border: 1px solid var(--dim); }
+
+.contact-link-row { display: flex; background: var(--bg2); transition: background 0.2s; }
+.contact-link-row:hover { background: var(--panel); }
+.contact-link-row a {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  text-decoration: none;
+  width: 100%;
+  color: var(--text);
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+.contact-link-row a:hover { color: var(--orange); }
+
+.clink-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--orange);
+  width: 64px;
+  flex-shrink: 0;
+}
+
+.clink-arrow {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--dim);
+  transition: color 0.2s, transform 0.2s;
+}
+.contact-link-row:hover .clink-arrow { color: var(--orange); transform: translateX(4px); }
+
+.contact-form { display: flex; flex-direction: column; gap: 1px; }
+
+.form-field { display: flex; flex-direction: column; background: var(--dim); }
+
+.form-field label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--orange);
+  padding: 0.5rem 1rem 0;
+  background: var(--panel);
+}
+
+.form-field input,
+.form-field textarea {
+  background: var(--panel);
+  border: none;
+  padding: 0.5rem 1rem 0.75rem;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--bright);
+  outline: none;
+  resize: none;
+  transition: background 0.2s;
+}
+.form-field input:focus,
+.form-field textarea:focus { background: var(--bg3); }
+
+.form-submit {
+  margin-top: 4px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--orange);
+  border: none;
+  padding: 0.9rem 2rem;
+  cursor: pointer;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  transition: background 0.2s;
+  align-self: flex-start;
+}
+.form-submit:hover { background: var(--orange2); }
+
+footer {
+  position: relative;
+  z-index: 1;
+  padding: 1.5rem 2.5rem;
+  border-top: 1px solid var(--dim);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg);
+}
+
+footer p {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mid);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+@media (max-width: 700px) {
+  nav { padding: 0 1.25rem; }
+  .nav-links { gap: 1rem; }
+  section { padding: 4rem 1.25rem; }
+  #hero { padding: 6rem 1.25rem 4rem; }
+  .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+  .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .project-card { grid-template-columns: 48px 1fr; }
+  .project-link-col { display: none; }
+  .achievement-row { grid-template-columns: 48px 1fr; }
+  .ach-year { display: none; }
+  .rev-counter { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<nav>
+  <a href="#hero" class="nav-logo">Bevin.eng</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#achievements">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-speedlines">
+    <div class="speedline"></div>
+    <div class="speedline"></div>
+    <div class="speedline"></div>
+    <div class="speedline"></div>
+    <div class="speedline"></div>
+    <div class="speedline"></div>
+  </div>
+
+  <div class="rev-counter">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="90" fill="none" stroke="#3a3a48" stroke-width="1"/>
+      <circle cx="100" cy="100" r="75" fill="none" stroke="#3a3a48" stroke-width="0.5" stroke-dasharray="4 6"/>
+      <g transform="translate(100,100)">
+        <line x1="0" y1="-82" x2="0" y2="-70" stroke="#e8500a" stroke-width="1.5" transform="rotate(-120)"/>
+        <line x1="0" y1="-82" x2="0" y2="-74" stroke="#6a6a80" stroke-width="1" transform="rotate(-90)"/>
+        <line x1="0" y1="-82" x2="0" y2="-74" stroke="#6a6a80" stroke-width="1" transform="rotate(-60)"/>
+        <line x1="0" y1="-82" x2="0" y2="-70" stroke="#e8500a" stroke-width="1.5" transform="rotate(-30)"/>
+        <line x1="0" y1="-82" x2="0" y2="-74" stroke="#6a6a80" stroke-width="1" transform="rotate(0)"/>
+        <line x1="0" y1="-82" x2="0" y2="-74" stroke="#6a6a80" stroke-width="1" transform="rotate(30)"/>
+        <line x1="0" y1="-82" x2="0" y2="-70" stroke="#e8500a" stroke-width="1.5" transform="rotate(60)"/>
+        <line x1="0" y1="-82" x2="0" y2="-74" stroke="#6a6a80" stroke-width="1" transform="rotate(90)"/>
+        <line x1="0" y1="10" x2="0" y2="-68" stroke="#e8500a" stroke-width="2" stroke-linecap="round" transform="rotate(35)" id="needle"/>
+        <circle cx="0" cy="0" r="5" fill="#e8500a"/>
+        <circle cx="0" cy="0" r="2" fill="#0a0a0c"/>
+      </g>
+      <text x="100" y="148" text-anchor="middle" fill="#6a6a80" font-family="'Share Tech Mono',monospace" font-size="9" letter-spacing="2">RPM x1000</text>
+      <text x="100" y="120" text-anchor="middle" fill="#e8500a" font-family="'Share Tech Mono',monospace" font-size="22" font-weight="500" id="rpm-display">7.2</text>
+    </svg>
+  </div>
+
+  <div class="hero-eyebrow">Engineering &amp; Science Portfolio</div>
+
+  <h1>Bevin Frederick<br><span>Gonsalves</span></h1>
+
+  <p class="hero-sub">Mechanical Engineer</p>
+
+  <div class="hero-ctas">
+    <a href="#projects" class="btn-primary">View Projects</a>
+    <a href="#contact" class="btn-outline">Get in Touch →</a>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-inner reveal">
+    <div class="section-header">
+      <div class="section-id">01 &nbsp; About</div>
+      <h2>Profile</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I am a first year student at Binghamton University, pursuing an M.S. in Mechanical Engineering. An intense passion for motorsports and aviation has fuelled my desire to study Mechanical Engineering.</p>
+        <p>My work spans Vehicle Dynamics, Aerodynamics, CAD, Composite Fabrication and Data Analytics. I have competed in the Indian Karting Race and SAE Aerothon, and contributed to the design and fabrication of the undertray of Binghamton Motorsports FSAE car.</p>
+        <p>Currently looking for internship and Co-op opportunities in the motorsport sector.</p>
+      </div>
+      <div class="data-panel">
+        <div class="data-panel-header">// Status</div>
+        <div class="data-row">
+          <span class="data-key">University</span>
+          <span class="data-val">Binghamton University</span>
+        </div>
+        <div class="data-row">
+          <span class="data-key">Degree</span>
+          <span class="data-val">MS in Mechanical Engineering</span>
+        </div>
+        <div class="data-row">
+          <span class="data-key">Year</span>
+          <span class="data-val">Year 1</span>
+        </div>
+        <div class="data-row">
+          <span class="data-key">Location</span>
+          <span class="data-val">Binghamton, New York</span>
+        </div>
+        <div class="data-row">
+          <span class="data-key">GPA</span>
+          <span class="data-val">3.66</span>
+        </div>
+        <div class="data-row">
+          <span class="data-key">Status</span>
+          <span class="data-val live">Open to Internships</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-inner reveal">
+    <div class="section-header">
+      <div class="section-id">02 &nbsp; Skills</div>
+      <h2>Technical Stack</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">// Languages</div>
+        <ul class="skill-check-list">
+          <li><span class="check">✓</span>Python</li>
+          <li><span class="check">✓</span>MATLAB</li>
+          <li><span class="check">✓</span>R</li>
+          <li><span class="check">✓</span>C</li>
+          <li><span class="check">✓</span>C++</li>
+          <li><span class="check">✓</span>Java</li>
+          <li><span class="check">✓</span>Arduino</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">// CAD</div>
+        <ul class="skill-check-list">
+          <li><span class="check">✓</span>SolidWorks</li>
+          <li><span class="check">✓</span>Fusion 360</li>
+          <li><span class="check">✓</span>AutoCAD</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">// Simulation</div>
+        <ul class="skill-check-list">
+          <li><span class="check">✓</span>ANSYS</li>
+          <li><span class="check">✓</span>XFLR</li>
+          <li><span class="check">✓</span>Simulink</li>
+          <li><span class="check">✓</span>KiCAD</li>
+          <li><span class="check">✓</span>LOTUS Shark</li>
+          <li><span class="check">✓</span>Coppelia Sim</li>
+          <li><span class="check">✓</span>UIPath Web Automation</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">// Data & ML</div>
+        <ul class="skill-check-list">
+          <li><span class="check">✓</span>Pandas</li>
+          <li><span class="check">✓</span>NumPy</li>
+          <li><span class="check">✓</span>Scikit-learn</li>
+          <li><span class="check">✓</span>Matplotlib</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">// Soft Skills</div>
+        <ul class="skill-check-list">
+          <li><span class="check">✓</span>Communication</li>
+          <li><span class="check">✓</span>Leadership</li>
+          <li><span class="check">✓</span>Project Management</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-inner reveal">
+    <div class="section-header">
+      <div class="section-id">03 &nbsp; Projects</div>
+      <h2>Race Log</h2>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-num">01</div>
+        <div>
+          <div class="project-title">Design and Fabrication of an FSAE Car Undertray</div>
+          <p class="project-desc">Designed and fabricated an undertray for the Binghamton Motorsports FSAE team within rulebook constraints. Fusion 360 and ANSYS were used for design and validation. The carbon fibre component was fabricated through wet layup and vacuum bagging, then tested via tufting.</p>
+          <div class="tag-row">
+            <span class="tag">Fusion 360</span>
+            <span class="tag">ANSYS</span>
+            <span class="tag">Carbon Fibre</span>
+            <span class="tag">Composites</span>
+            <span class="tag">Aerodynamics</span>
+          </div>
+        </div>
+        <div class="project-link-col"><a href="SDP128_Report.pdf" target="_blank" class="project-link">Report →</a></div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">02</div>
+        <div>
+          <div class="project-title">Design, Analysis and Optimisation of a Race Car Rear Wing</div>
+          <p class="project-desc">Leveraged CAD and CFD tools to design a range of rear wing configurations in compliance with the FIA 2026 Formula 1 regulations. Key design considerations included the trade-off between downforce and drag, and overall aerodynamic efficiency.</p>
+          <div class="tag-row">
+            <span class="tag">CFD</span>
+            <span class="tag">CAD</span>
+            <span class="tag">Aerodynamics</span>
+            <span class="tag">FIA Regulations</span>
+            <span class="tag">F1 2026</span>
+          </div>
+        </div>
+        <div class="project-link-col"><a href="Rear_Wing_Study.pdf" target="_blank" class="project-link">Report →</a></div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">03</div>
+        <div>
+          <div class="project-title">Vehicle Dynamics Optimisation of a Half Car Model</div>
+          <p class="project-desc">Used the Runge-Kutta method to simulate suspension response when encountering an obstacle, then applied Bayesian Optimisation to tune spring stiffness, damping coefficient and centre of gravity position. A plug-and-play model allowing user-defined inputs for mass, wheelbase, velocity and obstacle geometry.</p>
+          <div class="tag-row">
+            <span class="tag">Python</span>
+            <span class="tag">Vehicle Dynamics</span>
+            <span class="tag">Bayesian Optimisation</span>
+            <span class="tag">Runge-Kutta</span>
+          </div>
+        </div>
+        <div class="project-link-col"><a href="Half_Car_Report_M.pdf" target="_blank" class="project-link">Report →</a></div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">04</div>
+        <div>
+          <div class="project-title">Design and Assembly of an Electric Racing Kart — Marlin Racing</div>
+          <p class="project-desc">Joined as Steering Lead and appointed Team Captain for the 2025 season. The project demanded a broad skillset spanning project management, CAD and Finite Element Analysis, leading the team through the full design and assembly cycle of a competitive electric racing kart.</p>
+          <div class="tag-row">
+            <span class="tag">CAD</span>
+            <span class="tag">FEA</span>
+            <span class="tag">Electric Powertrain</span>
+            <span class="tag">Team Leadership</span>
+            <span class="tag">Project Management</span>
+          </div>
+        </div>
+        <div class="project-link-col"><a href="#" class="project-link">View →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="achievements">
+  <div class="section-inner reveal">
+    <div class="section-header">
+      <div class="section-id">04 &nbsp; Experience</div>
+      <h2>Pit Lane</h2>
+    </div>
+    <div class="experience-list">
+      <div class="experience-row">
+        <div class="exp-top">
+          <div class="exp-title">Captain / Driver / Steering Lead — Marlin Racing (Race Kart)</div>
+          <div class="exp-year">2023 – 2025</div>
+        </div>
+        <div class="exp-desc">Spent the first year deeply involved in the design and development of the Ackermann steering system. Upon being appointed Team Captain, oversaw and guided the design and overall operations of the racing team. The team achieved All India Rank 9 at the Indian Karting Race 2025 (Competition Debut).</div>
+      </div>
+      <div class="experience-row">
+        <div class="exp-top">
+          <div class="exp-title">Summer Design Project Intern — McIntosh Laboratory, Inc.</div>
+          <div class="exp-year">2026</div>
+        </div>
+        <div class="exp-desc">Worked with the design team to help the company leverage their testing data in order to improve operational efficiency and streamline the testing process.</div>
+      </div>
+      <div class="experience-row">
+        <div class="exp-top">
+          <div class="exp-title">Aerodynamics Team Member — Binghamton Motorsports (FSAE)</div>
+          <div class="exp-year">2026 – Present</div>
+        </div>
+        <div class="exp-desc">Worked on the design and fabrication of the carbon fibre undertray of the FSAE car, with special focus on the central keel section of the floor.</div>
+      </div>
+      <div class="experience-row">
+        <div class="exp-top">
+          <div class="exp-title">Vehicle Dynamics Sub-Lead — Team Lightning (FSAE India)</div>
+          <div class="exp-year">2024</div>
+        </div>
+        <div class="exp-desc">Designed the suspension and steering system for the team's FSAE race car.</div>
+      </div>
+      <div class="experience-row">
+        <div class="exp-top">
+          <div class="exp-title">Team Member — MPSTME AeroXperts (UAV)</div>
+          <div class="exp-year">2022 – 2023</div>
+        </div>
+        <div class="exp-desc">Designed and 3D printed the chassis of a quadcopter drone, leveraging generative design for weight reduction. Team achievements: SAE India Aerothon 2022 — All India Rank 13 &nbsp;·&nbsp; SAE India Aerothon 2023 — All India Rank 6.</div>
+      </div>
+      <div class="experience-row">
+        <div class="exp-top">
+          <div class="exp-title">Powertrain Team Member — MPSTME Racing Team (ATV)</div>
+          <div class="exp-year">2023</div>
+        </div>
+        <div class="exp-desc">Worked on the calculations for a Continuously Varying Transmission (CVT) and 4-Wheel Drive transfer case for the team's All Terrain Vehicle.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-inner reveal">
+    <div class="section-header">
+      <div class="section-id">05 &nbsp; Contact</div>
+      <h2>Open Channel</h2>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <p class="contact-desc">Seeking internship roles, research collaborations, or project partners. If you're building something worth driving hard for — get in touch.</p>
+        <ul class="contact-links">
+          <li class="contact-link-row">
+            <a href="mailto:bevin2108@gmail.com">
+              <span class="clink-label">Email</span>
+              bevin2108@gmail.com
+              <span class="clink-arrow">→</span>
+            </a>
+          </li>
+          <li class="contact-link-row">
+            <a href="https://www.linkedin.com/in/bevin-gonsalves-772a67231/" target="_blank">
+              <span class="clink-label">LinkedIn</span>
+              /in/bevin-gonsalves
+              <span class="clink-arrow">→</span>
+            </a>
+          </li>
+          <li class="contact-link-row">
+            <a href="https://github.com/pitwallscuderia" target="_blank">
+              <span class="clink-label">GitHub</span>
+              /pitwallscuderia
+              <span class="clink-arrow">→</span>
+            </a>
+          </li>
+          <li class="contact-link-row">
+            <a href="/resume.pdf" target="_blank">
+              <span class="clink-label">CV</span>
+              Download PDF
+              <span class="clink-arrow">→</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-field">
+          <label for="name">Name</label>
+          <input type="text" id="name" placeholder="Jane Smith" required>
+        </div>
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="jane@company.com" required>
+        </div>
+        <div class="form-field">
+          <label for="message">Message</label>
+          <textarea id="message" rows="5" placeholder="Tell me about the opportunity..." required></textarea>
+        </div>
+        <button type="submit" class="form-submit">Transmit Message →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 // Bevin Frederick Gonsalves</p>
+  <p>All systems nominal &nbsp;·&nbsp; Open to deployment</p>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      obs.unobserve(e.target);
+      e.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+        setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, 200);
+      });
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+reveals.forEach(el => obs.observe(el));
+
+const needle = document.getElementById('needle');
+const rpmDisplay = document.getElementById('rpm-display');
+if (needle) {
+  let angle = 35, dir = 1;
+  setInterval(() => {
+    angle += (Math.random() * 6 - 2) * dir;
+    if (angle > 80) dir = -1;
+    if (angle < -10) dir = 1;
+    needle.setAttribute('transform', 'rotate(' + angle + ')');
+    if (rpmDisplay) rpmDisplay.textContent = (4.5 + (angle + 10) / 90 * 5).toFixed(1);
+  }, 120);
+}
+
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
+  btn.textContent = 'Transmitted ✓';
+  btn.style.background = '#2ecc71';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = 'Transmit Message →';
+    btn.style.background = '';
+    btn.disabled = false;
+    e.target.reset();
+  }, 3000);
+}
+</script>
+</body>
+</html>
